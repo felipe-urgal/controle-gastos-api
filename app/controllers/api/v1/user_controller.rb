@@ -1,3 +1,4 @@
+# app/controllers/api/v1/user_controller.rb
 module Api
   module V1
     class UserController < ApplicationController

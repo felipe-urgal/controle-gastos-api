@@ -1,3 +1,4 @@
+# app/controllers/api/v1/auth_controller.rb
 module Api
   module V1
     class AuthController < ApplicationController
@@ -34,23 +35,26 @@ module Api
           return render_error("E-mail ou senha inválidos!", :unauthorized)
         end
 
+        # Se quiser manter apenas 1 sessão ativa por usuário:
         UserSession.where(user_id: user.id, revoked_at: nil).update_all(revoked_at: Time.current)
 
         raw_token = SessionTokenService.generate_token
         token_digest = SessionTokenService.digest(raw_token)
+        expires_at = 7.days.from_now
 
         UserSession.create!(
           user: user,
           token_digest: token_digest,
-          expires_at: 7.days.from_now,
+          expires_at: expires_at,
           last_used_at: Time.current
         )
 
         user.update_column(:last_login, Time.current)
 
+        set_session_cookie(raw_token, expires_at)
+
         render_success(
           {
-            token: raw_token,
             user: UserSerializer.call(user)
           },
           "Login realizado com sucesso!"
@@ -58,7 +62,9 @@ module Api
       end
 
       def logout
-        current_session.revoke!
+        current_session&.revoke!
+        delete_session_cookie
+
         render_success(nil, "Logout realizado com sucesso!")
       end
 
@@ -75,6 +81,41 @@ module Api
           password: params[:password],
           password_confirmation: params[:password]
         }
+      end
+
+      def set_session_cookie(raw_token, expires_at)
+        cookies.signed[:session_token] = {
+          value: raw_token,
+          httponly: true,
+          secure: Rails.env.production?,
+          same_site: cookie_same_site,
+          expires: expires_at,
+          domain: cookie_domain
+        }.compact
+      end
+
+      def delete_session_cookie
+        cookies.delete(
+          :session_token,
+          {
+            secure: Rails.env.production?,
+            same_site: cookie_same_site,
+            domain: cookie_domain
+          }.compact
+        )
+      end
+
+      def cookie_same_site
+        # Se front e API estiverem no mesmo "site" (ex: app.meudominio.com + api.meudominio.com), :lax costuma funcionar.
+        # Se tiver cenário realmente cross-site, troque para :none (e secure true em produção).
+        Rails.env.production? ? :lax : :lax
+      end
+
+      def cookie_domain
+        # Em desenvolvimento, normalmente deixe nil.
+        # Em produção, se usar subdomínios (app.xxx.com + api.xxx.com), pode usar:
+        # ".seudominio.com"
+        nil
       end
     end
   end

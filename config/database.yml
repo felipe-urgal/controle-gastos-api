@@ -16,8 +16,5 @@ test:
   database: controle_gastos_api_test
 
 production:
-  <<: *default
-  database: controle_gastos_api_production
-  username: controle_gastos_api
-  password: <%= ENV["CONTROLE_GASTOS_API_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
   

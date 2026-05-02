@@ -1,3 +1,4 @@
+# app/models/user_session.rb
 class UserSession < ApplicationRecord
   belongs_to :user
 

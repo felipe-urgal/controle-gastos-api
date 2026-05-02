@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include ActionController::Cookies
+
   before_action :authenticate_request
 
   attr_reader :current_user, :current_session
@@ -6,18 +8,26 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
-    token = bearer_token
+    token = session_token
 
-    render_unauthorized and return if token.blank?
+    return render_unauthorized if token.blank?
 
     token_digest = SessionTokenService.digest(token)
 
     @current_session = UserSession.includes(:user).active.find_by(token_digest: token_digest)
 
-    render_unauthorized and return unless @current_session
+    return render_unauthorized unless @current_session
 
     @current_session.update_column(:last_used_at, Time.current)
     @current_user = @current_session.user
+  end
+
+  def session_token
+    cookie_token || bearer_token
+  end
+
+  def cookie_token
+    cookies.signed[:session_token]
   end
 
   def bearer_token
