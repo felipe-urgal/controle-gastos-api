@@ -3,7 +3,7 @@
 one:
   name: MyString
   color: "#000000"
-  icon: tag
+  icon: MyString
   is_active: false
   category_type: 1
   description: MyString
@@ -13,7 +13,7 @@ one:
 two:
   name: MyString
   color: "#000000"
-  icon: tag
+  icon: MyString
   is_active: false
   category_type: 1
   description: MyString

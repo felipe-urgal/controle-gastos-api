@@ -7,7 +7,7 @@ one:
   currency: XXX
   is_active: false
   color: "#000000"
-  icon: tag
+  icon: MyString
   description: MyString
   user: one
 
@@ -18,7 +18,7 @@ two:
   currency: XXX
   is_active: false
   color: "#000000"
-  icon: tag
+  icon: MyString
   description: MyString
   user: two
 
