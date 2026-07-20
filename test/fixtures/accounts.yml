@@ -4,10 +4,10 @@ one:
   name: MyString
   account_type: 1
   balance: 1
-  currency: MyString
+  currency: USD
   is_active: false
-  color: MyString
-  icon: MyString
+  color: '#FF0000'
+  icon: test
   description: MyString
   user: one
 
@@ -15,9 +15,20 @@ two:
   name: MyString
   account_type: 1
   balance: 1
-  currency: MyString
+  currency: EUR
   is_active: false
-  color: MyString
-  icon: MyString
+  color: '#00FF00'
+  icon: test
   description: MyString
   user: two
+
+checking:
+  name: Conta Corrente
+  account_type: 0
+  balance: 100000
+  currency: BRL
+  is_active: true
+  color: '#3B82F6'
+  icon: wallet
+  description: Conta usada nos testes do dashboard
+  user: one

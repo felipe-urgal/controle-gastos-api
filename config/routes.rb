@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       patch "user", to: "user#update"
       delete "user", to: "user#destroy"
 
+      get "dashboard", to: "dashboard#show"
+
       resources :accounts, only: [:index, :show, :create, :update, :destroy]
       resources :categories, only: [:index, :show, :create, :update, :destroy]
       resources :transactions, only: [:index, :show, :create, :update, :destroy]

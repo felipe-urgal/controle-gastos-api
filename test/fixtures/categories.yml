@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  color: MyString
-  icon: MyString
+  color: '#FF0000'
+  icon: test
   is_active: false
   category_type: 1
   description: MyString
@@ -12,10 +12,20 @@ one:
 
 two:
   name: MyString
-  color: MyString
-  icon: MyString
+  color: '#00FF00'
+  icon: test
   is_active: false
   category_type: 1
   description: MyString
   position: 1
   user: two
+
+salary:
+  name: Salário
+  color: '#22C55E'
+  icon: dollar-sign
+  is_active: true
+  category_type: 0
+  description: Renda fixa
+  position: 0
+  user: one
