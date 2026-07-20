@@ -47,6 +47,12 @@ class Api::V1::DashboardControllerTest < ActionDispatch::IntegrationTest
     assert_response :unauthorized
   end
 
+  test "returns bad request for an invalid month" do
+    get "/api/v1/dashboard", params: { year: 2026, month: 13 }, headers: auth_headers
+
+    assert_response :bad_request
+  end
+
   private
 
   def auth_headers

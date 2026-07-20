@@ -56,7 +56,7 @@ class DashboardSerializer
       .sort_by { |_category_id, total| -total }
       .first(5)
 
-    categories = Category.where(id: totals.map(&:first)).index_by(&:id)
+    categories = user.categories.where(id: totals.map(&:first)).index_by(&:id)
 
     totals.map do |category_id, total|
       category = categories[category_id]
@@ -79,6 +79,6 @@ class DashboardSerializer
   end
 
   def recent_transactions
-    user.transactions.order(created_at: :desc).limit(5).map { |t| TransactionSerializer.call(t) }
+    user.transactions.includes(:account, :category).order(created_at: :desc).limit(5).map { |t| TransactionSerializer.call(t) }
   end
 end
