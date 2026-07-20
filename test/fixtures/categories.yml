@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  color: '#FF0000'
-  icon: test
+  color: "#000000"
+  icon: tag
   is_active: false
   category_type: 1
   description: MyString
@@ -12,8 +12,8 @@ one:
 
 two:
   name: MyString
-  color: '#00FF00'
-  icon: test
+  color: "#000000"
+  icon: tag
   is_active: false
   category_type: 1
   description: MyString

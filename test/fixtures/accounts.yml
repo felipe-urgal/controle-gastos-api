@@ -4,10 +4,10 @@ one:
   name: MyString
   account_type: 1
   balance: 1
-  currency: USD
+  currency: XXX
   is_active: false
-  color: '#FF0000'
-  icon: test
+  color: "#000000"
+  icon: tag
   description: MyString
   user: one
 
@@ -15,10 +15,10 @@ two:
   name: MyString
   account_type: 1
   balance: 1
-  currency: EUR
+  currency: XXX
   is_active: false
-  color: '#00FF00'
-  icon: test
+  color: "#000000"
+  icon: tag
   description: MyString
   user: two
 
