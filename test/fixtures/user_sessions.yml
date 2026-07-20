@@ -2,14 +2,14 @@
 
 one:
   user: one
-  token_digest: MyString
+  token_digest: MyString-one
   expires_at: 2026-04-29 09:19:59
   revoked_at: 2026-04-29 09:19:59
   last_used_at: 2026-04-29 09:19:59
 
 two:
   user: two
-  token_digest: MyString
+  token_digest: MyString-two
   expires_at: 2026-04-29 09:19:59
   revoked_at: 2026-04-29 09:19:59
   last_used_at: 2026-04-29 09:19:59

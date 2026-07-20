@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  email: MyString
+  email: one@example.com
   password_digest: MyString
   last_login: 2026-04-29 09:19:21
   is_active: false
@@ -10,7 +10,7 @@ one:
 
 two:
   name: MyString
-  email: MyString
+  email: two@example.com
   password_digest: MyString
   last_login: 2026-04-29 09:19:21
   is_active: false
